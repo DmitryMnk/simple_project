@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: pgsql_${PROJECT_PREFIX}
+    image: postgres:12.5-alpine
+    hostname: ${POSTGRES_HOST}
+    restart: always
+    ports:
+      - "9432:${POSTGRES_PORT}"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_NAME}
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    container_name: web_${PROJECT_PREFIX}
+    build:
+      dockerfile: app/Dockerfile
+    restart: always
+    ports:
+      - "${HTTP_PORT}:${HTTP_PORT}"
+
+    depends_on:
+      - db
+    volumes:
+      - ./app:/app
+    env_file:
+      - .env
+
+volumes:
+  postgres_data:

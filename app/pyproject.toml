@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "simple-project"
+version = "0.1.0"
+description = ""
+authors = ["d.mischenko"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = {extras = ["all"], version = "^0.115.5"}
+pydantic = "^2.9.2"
+mypy = "^1.13.0"
+alembic = "^1.14.0"
+sqlalchemy = "^2.0.36"
+asyncpg = "^0.30.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.10.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
