@@ -2,9 +2,7 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from app.core.config import POSTGRES_CONFIG
-
-if TYPE_CHECKING:
-    from sqlalchemy import URL
+from sqlalchemy import URL
 
 class PostgresDB:
 
@@ -22,4 +20,4 @@ class PostgresDB:
             yield session
             await session.close()
 
-session = PostgresDB(POSTGRES_CONFIG.get_connection_url)
+db_psql_connector = PostgresDB(POSTGRES_CONFIG.get_connection_url())
